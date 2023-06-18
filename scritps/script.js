@@ -117,6 +117,14 @@ function buscarPais() {
     let pais = $(".form-control").val().toUpperCase();
 
     if (lista_paises.includes(pais)) {
-        console.log("si")
+        // pais = pais.toLowerCase();
+        let aux = $(".principal").children()[0];
+        let buscado = $(`.h-${pais}`).parent().parent().parent();
+        let buscadoPadre = buscado.parent();
+
+        $(".principal").html(buscado);
+        buscadoPadre.html(aux);
+
+        $(".form-control").val("");
     }
 }
