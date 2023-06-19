@@ -40,16 +40,16 @@ let bloque = function (pais, hora) {
         clase = "h-" + pais;
     }
 
-    return `<div class="col-lg-3 pb-3">
-    <div class="container">
-      <div class="row d-flex justify-content-center">
-        <div class="col-10 d-flex flex-column">
-          <div class="pais m-auto text-center">${pais}</div>
-          <div class="hora m-auto ${clase} d-${hora}"></div>
-        </div>
-      </div>
-    </div>
-  </div>`;
+    return `<div class="col-lg-3 ms-lg-5 me-lg-5 mb-lg-5 d-flex flex-column justify-content-center pais-alto">
+                <div class="container">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-10 d-flex flex-column">
+                            <div class="pais m-auto text-center">${pais}</div>
+                            <div class="hora m-auto ${clase} d-${hora}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
 
 }
 
@@ -79,7 +79,6 @@ function horaActual() {
 
 function mostrarHoras() {
     const [hora, minuto, segundo] = horaActual();
-    // console.log(hora, minuto, segundo)
 
     let diferencia;
 
@@ -99,7 +98,6 @@ insertarBloques();
 $(document).ready(function () {
 
     $("body").css("visibility", "visible");
-    insertarBloques();
     setInterval(mostrarHoras, 1000);
 
     $(".fa-search").click(buscarPais);
@@ -113,11 +111,9 @@ $(document).ready(function () {
 });
 
 function buscarPais() {
-    console.log($(".form-control").val())
     let pais = $(".form-control").val().toUpperCase();
 
     if (lista_paises.includes(pais)) {
-        // pais = pais.toLowerCase();
         let aux = $(".principal").children()[0];
         let buscado = $(`.h-${pais}`).parent().parent().parent();
         let buscadoPadre = buscado.parent();
@@ -126,5 +122,7 @@ function buscarPais() {
         buscadoPadre.html(aux);
 
         $(".form-control").val("");
+    } else {
+        alert(`${pais} no está en la lista.`)
     }
 }
